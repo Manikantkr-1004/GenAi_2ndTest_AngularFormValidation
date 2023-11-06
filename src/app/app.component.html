@@ -1,0 +1,57 @@
+<form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm">
+
+  <div class="form-fields">
+    <input placeholder="Enter Your Name" type="text" name="name" id="name" [(ngModel)]="data.name" #name="ngModel" required /><br>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+      <div *ngIf="name.errors?.['required']">Name is required</div>
+    </div>
+  </div>
+
+  <div class="form-fields">
+    <input placeholder="Enter Your Email" type="email" email name="email" id="email" [(ngModel)]="data.email" #email="ngModel" required /><br>
+    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors?.['required']">Email is required</div>
+      <div *ngIf="email.errors?.['email']">Email is invalid</div>
+    </div>
+  </div>
+
+  <div class="form-fields">
+    <input placeholder="Enter Your Password" type="password" name="password" id="password" minlength="6" [(ngModel)]="data.password" #password="ngModel" required /><br>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors?.['required']">Password is required</div>
+      <div *ngIf="password.errors?.['minlength']">Password must be atleast 6 character long.</div>
+    </div>
+  </div>
+
+  <div class="form-fields">
+    <input placeholder="Enter Your Age" type="number" name="age" id="age" min="18" max="40" [(ngModel)]="data.age" #age="ngModel" required /><br>
+    <div *ngIf="age.invalid && (age.dirty || age.touched)">
+      <div *ngIf="age.errors?.['required']">Age is required</div>
+      <div *ngIf="age.errors?.['min']">Age must be 18 or above.</div>
+      <div *ngIf="age.errors?.['max']">Age must be 40 or below it.</div>
+    </div>
+  </div>
+
+  <div class="form-fields">
+    <select name="country" id="country" [(ngModel)]="data.country" #country="ngModel" required>
+      <option value="">--Select Country--</option>
+      <option value="India">India</option>
+      <option value="USA">USA</option>
+      <option value="UAE">UAE</option>
+      <option value="Japan">Japan</option>
+    </select>
+    <div *ngIf="country.invalid && (country.dirty || country.touched)">
+      <div *ngIf="country.errors?.['required']">Country is required</div>
+    </div>
+  </div>
+
+  <div class="form-fields">
+    <input type="checkbox" name="accept" id="accept" [(ngModel)]="data.accept" #accept="ngModel" required />I Accept Terms and conditions.
+    <div *ngIf="accept.invalid && (accept.dirty || accept.touched)">
+      <div *ngIf="accept.errors?.['required']">T&C Acceptance is required</div>
+    </div>
+  </div>
+
+  <input type="submit" [disabled]="registrationForm.invalid" value="Submit" />
+
+</form>
